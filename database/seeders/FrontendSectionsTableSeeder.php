@@ -1,0 +1,147 @@
+<?php
+
+namespace Database\Seeders;
+
+use DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class FrontendSectionsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('frontend_sections')->insert([
+            [
+                'id' => 1,
+                'name' => 'Hero Banner',
+                'page_title' => 'Banner page title',
+                'title' => 'Manage Alumni Related Tasks In One Place.',
+                'slug' => 'hero_banner',
+                'has_page_title' => 3,
+                'has_banner_image' => 1,
+                'has_image' => 1,
+                'has_description' => 1,
+                'description' => 'Create and see all your free and paid events, job post, news, notification, buy ticket with bunch of payment gateway system, find an alumni & chat with them, get membership more & more through zaialumni.',
+                'banner_image' => null,
+                'image' => null,
+                'status' => 1,
+                'created_at' => '2023-11-16 07:39:04',
+                'updated_at' => '2023-11-16 07:39:04',
+                'deleted_at' => null,
+            ],
+            [
+                'id' => 2,
+                'name' => 'Core Features',
+                'page_title' => 'Core Features',
+                'title' => 'Bunch Of Features',
+                'slug' => 'core_features',
+                'has_page_title' => 3,
+                'has_banner_image' => 0,
+                'has_image' => 3,
+                'has_description' => 3,
+                'description' => '2023-11-16 13:39:04',
+                'banner_image' => 1,
+                'image' => null,
+                'status' => 1,
+                'created_at' => null,
+                'updated_at' => '2023-11-16 07:39:04',
+                'deleted_at' => null,
+            ],
+            [
+                'id' => 3,
+                'name' => 'Explore Core Pages',
+                'page_title' => 'Explore Core Pages',
+                'title' => 'Zaialumni Made The App Effortless With Some Core Pages',
+                'slug' => 'core_pages',
+                'has_page_title' => 1,
+                'has_banner_image' => 3,
+                'has_image' => 3,
+                'has_description' => 1,
+                'description' => 'Explore some of our core pages that made the app effortless by itself.',
+                'banner_image' => null,
+                'image' => null,
+                'status' => 1,
+                'created_at' => '2023-11-16 07:39:04',
+                'updated_at' => '2023-11-16 07:39:04',
+                'deleted_at' => null,
+            ],
+            [
+                'id' => 4,
+                'name' => 'Pricing Plan',
+                'page_title' => 'Pricing Plan',
+                'title' => "Pick the plan that's right for your business.",
+                'slug' => 'pricing_plan',
+                'has_page_title' => 1,
+                'has_banner_image' => 3,
+                'has_image' => 3,
+                'has_description' => 3,
+                'description' => 'Connect alumni with mentors or coaches who can offer them guidance, advice, or feedback on their personal or professional goals, They can also help them',
+                'banner_image' => null,
+                'image' => null,
+                'status' => 1,
+                'created_at' => '2023-11-16 07:39:04',
+                'updated_at' => '2023-11-16 07:39:04',
+                'deleted_at' => null,
+            ],
+            [
+                'id' => 5,
+                'name' => 'Testimonials',
+                'page_title' => 'Testimonials',
+                'title' => 'What Our Student Have to Say About Zaialumni.',
+                'slug' => 'testimonials_area',
+                'has_page_title' => 1,
+                'has_banner_image' => 3,
+                'has_image' => 3,
+                'has_description' => 1,
+                'description' => 'Connect alumni with mentors or coaches who can offer them guidance, advice, or feedback on their personal or professional goals, They can also help them',
+                'banner_image' => null,
+                'image' => null,
+                'status' => 1,
+                'created_at' => '2023-11-16 07:39:04',
+                'updated_at' => '2023-11-16 07:39:04',
+                'deleted_at' => null,
+            ],
+            [
+                'id' => 6,
+                'name' => "Faq's Area",
+                'page_title' => "FAQ'S",
+                'title' => 'Most Common Question About Saas Services.',
+                'slug' => 'faqs_area',
+                'has_page_title' => 1,
+                'has_banner_image' => 3,
+                'has_image' => 3,
+                'has_description' => 1,
+                'description' => 'Connect alumni with mentors or coaches who can offer them guidance, advice, or feedback on their personal or professional goals, They can also help them',
+                'banner_image' => null,
+                'image' => null,
+                'status' => 1,
+                'created_at' => '2023-11-16 07:39:04',
+                'updated_at' => '2023-11-16 07:39:04',
+                'deleted_at' => null,
+            ],
+            [
+                'id' => 7,
+                'name' => 'How Its Work',
+                'page_title' => 'How Its Work',
+                'title' => 'Nothing less than excellent',
+                'slug' => 'how_its_work_area',
+                'has_page_title' => 1,
+                'has_banner_image' => 3,
+                'has_image' => 3,
+                'has_description' => 1,
+                'description' => 'Connect alumni with mentors or coaches who can offer them guidance, advice, or feedback on their personal or professional goals, They can also help them',
+                'banner_image' => null,
+                'image' => null,
+                'status' => 1,
+                'created_at' => '2023-11-16 07:39:04',
+                'updated_at' => '2023-11-16 07:39:04',
+                'deleted_at' => null,
+            ],
+        ]);
+    }
+}

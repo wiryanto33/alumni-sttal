@@ -1,0 +1,478 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+class SettingsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // Clear existing records
+        DB::table('settings')->truncate();
+
+        // Prepare timestamp values
+        $now = Carbon::now()->toDateTimeString();
+        $pastDate = '2023-09-24 02:01:03';
+        $updateDate = '2023-11-16 07:37:55';
+
+        // Insert settings data
+        DB::table('settings')->insert([
+            [
+                'tenant_id' => NULL,
+                'option_key' => 'build_version',
+                'option_value' => '11',
+                'created_at' => $pastDate,
+                'updated_at' => $pastDate,
+            ],
+            [
+                'tenant_id' => NULL,
+                'option_key' => 'current_version',
+                'option_value' => '3.6',
+                'created_at' => $pastDate,
+                'updated_at' => $pastDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_name',
+                'option_value' => 'Zaialumni',
+                'created_at' => $pastDate,
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_email',
+                'option_value' => 'zaialumni@example.com',
+                'created_at' => $pastDate,
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_contact_number',
+                'option_value' => '+00000000000',
+                'created_at' => $pastDate,
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_location',
+                'option_value' => 'Khulna, Bangladesh',
+                'created_at' => $pastDate,
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => NULL,
+                'option_key' => 'app_copyright',
+                'option_value' => '© 2023 Zainik Lab. All Rights Reserved.',
+                'created_at' => $pastDate,
+                'updated_at' => $pastDate,
+            ],
+            [
+                'tenant_id' => NULL,
+                'option_key' => 'app_developed',
+                'option_value' => 'Zainikthemes',
+                'created_at' => $pastDate,
+                'updated_at' => $pastDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_timezone',
+                'option_value' => 'Asia/Dhaka',
+                'created_at' => $pastDate,
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_color_design_type',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_primary_color',
+                'option_value' => '#ff671b',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_secondary_color',
+                'option_value' => '#111111',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_text_color',
+                'option_value' => '#585858',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_section_bg_color',
+                'option_value' => '#fffaf7',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_hero_bg_color1',
+                'option_value' => '#000000',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_hero_bg_color2',
+                'option_value' => '#000000',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_hero_bg_color',
+                'option_value' => NULL,
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_preloader',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_logo',
+                'option_value' => '2',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_fav_icon',
+                'option_value' => '3',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'login_left_image',
+                'option_value' => '4',
+                'created_at' => '2023-09-24 08:03:08',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'google_login_status',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:03:24',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'facebook_login_status',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:03:25',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'cookie_status',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:03:32',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'register_file_required',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:04:37',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_preloader_status',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:04:39',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'registration_approval',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:04:42',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => NULL,
+                'option_key' => 'show_language_switcher',
+                'option_value' => '1',
+                'created_at' => '2023-09-24 08:04:43',
+                'updated_at' => '2023-09-24 08:04:43',
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'gateway_settings',
+                'option_value' => '{"paypal":[{"label":"Url","name":"url","is_show":0},{"label":"Client ID","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":1}],"stripe":[{"label":"Url","name":"url","is_show":0},{"label":"Public Key","name":"key","is_show":1},{"label":"Secret Key","name":"secret","is_show":0}],"razorpay":[{"label":"Url","name":"url","is_show":0},{"label":"Key","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":1}],"instamojo":[{"label":"Url","name":"url","is_show":0},{"label":"Api Key","name":"key","is_show":1},{"label":"Auth Token","name":"secret","is_show":1}],"mollie":[{"label":"Url","name":"url","is_show":0},{"label":"Mollie Key","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":0}],"paystack":[{"label":"Url","name":"url","is_show":0},{"label":"Public Key","name":"key","is_show":1},{"label":"Secret Key","name":"secret","is_show":0}],"mercadopago":[{"label":"Url","name":"url","is_show":0},{"label":"Client ID","name":"key","is_show":1},{"label":"Client Secret","name":"secret","is_show":1}],"sslcommerz":[{"label":"Url","name":"url","is_show":0},{"label":"Store ID","name":"key","is_show":1},{"label":"Store Password","name":"secret","is_show":1}],"flutterwave":[{"label":"Hash","name":"url","is_show":1},{"label":"Public Key","name":"key","is_show":1},{"label":"Client Secret","name":"secret","is_show":1}],"coinbase":[{"label":"Hash","name":"url","is_show":0},{"label":"API Key","name":"key","is_show":1},{"label":"Client Secret","name":"secret","is_show":0}],"binance":[{"label":"Url","name":"url","is_show":0},{"label":"API Key","name":"key","is_show":1},{"label":"Secret Key","name":"secret","is_show":1}]}',
+                'created_at' => '2023-06-19 01:35:33',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => NULL,
+                'option_key' => 'STORAGE_DRIVER',
+                'option_value' => 'public',
+                'created_at' => $pastDate,
+                'updated_at' => $pastDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'facebook_url',
+                'option_value' => 'https://www.facebook.com/',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'linkedin_url',
+                'option_value' => 'https://www.linkedin.com/',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'twitter_url',
+                'option_value' => 'https://www.google.com/',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'instagram_url',
+                'option_value' => 'https://www.google.com/',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'sign_up_left_text_title',
+                'option_value' => 'Welcome Back',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_our_community_title',
+                'option_value' => 'Join Our Community Now',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'sign_up_left_text_subtitle',
+                'option_value' => 'Register now to see people who have attended or graduated from a particular school, college or university.',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'footer_left_text',
+                'option_value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tempus elementum metus vitae vulputate. Proin mattis ligula a nunc suscipit, sed aliquam mi condimentum. In dictum erat lacus, id iaculis mauris tincidunt quis.',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'page_breadcrumb',
+                'option_value' => '245',
+                'created_at' => '2023-10-22 13:19:16',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'banner_title',
+                'option_value' => 'We are the proud student of Zaialumni university forever',
+                'created_at' => '2023-10-22 13:22:43',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'banner_description',
+                'option_value' => 'Zaialumni is a user friendly that helps alumni easily connect and manage their activities. Alumni can sign up and get approved by submitting necessary documents, which allows them to join the alumni community',
+                'created_at' => '2023-10-22 13:22:43',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'banner_background_breadcrumb',
+                'option_value' => '229',
+                'created_at' => '2023-10-22 13:22:43',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'upcoming_events_background',
+                'option_value' => '230',
+                'created_at' => '2023-10-22 13:22:43',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'app_black_logo',
+                'option_value' => '231',
+                'created_at' => '2023-10-22 13:28:40',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'about_us_title',
+                'option_value' => 'About Zaialumni',
+                'created_at' => '2023-10-22 13:30:22',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'about_us_description',
+                'option_value' => '<ul class="list-pb-22"><li class="d-flex align-items-start cg-12"><div class="flex-shrink-0 d-flex pt-5"><img src="/frontend/images/icon/check-circle.svg" alt=""></div><p class="fs-18 fw-400 lh-28 text-color1">Alumni Association provides and supports alumni programs and services, facilitates communication with alumni, and seeks to strengthen alumni bonds of fellowship, professional association and university affiliation.</p></li><li class="d-flex align-items-start cg-12"><div class="flex-shrink-0 d-flex pt-5"><img src="/frontend/images/icon/check-circle.svg" alt=""></div><p class="fs-18 fw-400 lh-28 text-color1">Connect alumni with mentors or coaches who can offer them guidance, advice, or feedback on their personal or professional goals. They can also help them expand their network, explore new opportunities, or overcome challenges</p></li><li class="d-flex align-items-start cg-12"><div class="flex-shrink-0 d-flex pt-5"><img src="/frontend/images/icon/check-circle.svg" alt=""></div><p class="fs-18 fw-400 lh-28 text-color1">The Alumni Association leverages the resources, talents, and initiatives of alumni and friends to advise, guide, advocate for and support the Association and the university in achieving their respective missions and goals. The Alumni Association provides an alumni network and encourages alumni engagement in the life of the university.</p></li><li class="d-flex align-items-start cg-12"><div class="flex-shrink-0 d-flex pt-5"><img src="/frontend/images/icon/check-circle.svg" alt=""></div><p class="fs-18 fw-400 lh-28 text-color1">Alumni Association provides and supports alumni programs and services, facilitates communication with alumni, and seeks to strengthen alumni bonds of fellowship, professional association and university affiliation.</p></li></ul>',
+                'created_at' => '2023-10-22 13:30:22',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'about_us_background_breadcrumb',
+                'option_value' => '233',
+                'created_at' => '2023-10-22 13:30:22',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_left_title',
+                'option_value' => 'Attend Events',
+                'created_at' => '2023-10-22 13:38:18',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_left_description',
+                'option_value' => '<p><span style="font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tempus elementum metus vitae vulputate. Proin mattis ligula a nunc suscipit,</span><br></p>',
+                'created_at' => '2023-10-22 13:38:18',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_middle_title',
+                'option_value' => 'Advance Your Career',
+                'created_at' => '2023-10-22 13:38:18',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_middle_description',
+                'option_value' => '<p><span style="font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tempus elementum metus vitae vulputate. Proin mattis ligula a nunc suscipit,</span><br></p>',
+                'created_at' => '2023-10-22 13:38:18',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_right_title',
+                'option_value' => 'Reconnect your Friend',
+                'created_at' => '2023-10-22 13:38:18',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_right_description',
+                'option_value' => '<p><span style="font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tempus elementum metus vitae vulputate. Proin mattis ligula a nunc suscipit,</span><br></p>',
+                'created_at' => '2023-10-22 13:38:18',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_left_icon',
+                'option_value' => '255',
+                'created_at' => '2023-10-22 13:40:40',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_middle_icon',
+                'option_value' => '256',
+                'created_at' => '2023-10-22 13:40:40',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'join_us_right_icon',
+                'option_value' => '257',
+                'created_at' => '2023-10-22 13:40:40',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'refund_policy_title',
+                'option_value' => 'Refund Policy Of Our Site',
+                'created_at' => '2023-10-22 14:11:13',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'refund_policy_description',
+                'option_value' => 'Refund Policy',
+                'created_at' => '2023-10-22 14:11:13',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'terms_condition_title',
+                'option_value' => 'Terms & Condition',
+                'created_at' => '2023-10-22 14:12:13',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'terms_condition_description',
+                'option_value' => 'Terms & Condition',
+                'created_at' => '2023-10-22 14:12:13',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'cookie_policy_title',
+                'option_value' => 'Cookie Policy',
+                'created_at' => '2023-10-22 14:12:37',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'cookie_policy_description',
+                'option_value' => 'Cookie Policy',
+                'created_at' => '2023-10-22 14:12:37',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'privacy_policy_title',
+                'option_value' => 'Privacy Policy',
+                'created_at' => '2023-10-22 14:12:54',
+                'updated_at' => $updateDate,
+            ],
+            [
+                'tenant_id' => 1,
+                'option_key' => 'privacy_policy_description',
+                'option_value' => 'Privacy Policy',
+                'created_at' => '2023-10-22 14:12:54',
+                'updated_at' => $updateDate,
+            ],
+        ]);
+    }
+}
