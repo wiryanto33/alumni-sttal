@@ -23,7 +23,24 @@ class BatchController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return $this->batchService->getAllData();
+            // Simple JSON response instead of DataTables
+            try {
+                $batches = Batch::select('id', 'name', 'created_at')
+                    ->when(function_exists('getTenantId'), function ($query) {
+                        return $query->where('tenant_id', getTenantId());
+                    })
+                    ->get();
+
+                return response()->json([
+                    'data' => $batches,
+                    'recordsTotal' => $batches->count(),
+                    'recordsFiltered' => $batches->count()
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'error' => 'Database error: ' . $e->getMessage()
+                ], 500);
+            }
         }
 
         $data['title'] = __('Batch Setting');
