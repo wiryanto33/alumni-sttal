@@ -22,7 +22,7 @@
                 </div>
                 <!-- Form -->
                  <!-- Form -->
-                 <form method="POST" action="{{ route('password.update', $token) }}">
+                 <form method="POST" action="{{ route('password.reset.update', $token) }}">
                     @csrf
                     <div class="pb-25">
                         <div class="primary-form-group">

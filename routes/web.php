@@ -40,7 +40,8 @@ Auth::routes(['verify' => false]);
 Route::get('password/reset/verify/{token}/{email}', [ForgotPasswordController::class, 'forgetVerifyForm'])->name('password.reset.verify_form');
 Route::get('password/reset/verify/{token}', [ForgotPasswordController::class, 'forgetVerify'])->name('password.reset.verify');
 Route::post('password/reset/verify-resend/{token}', [ForgotPasswordController::class, 'forgetVerifyResend'])->name('password.reset.verify_resend');
-Route::post('password/reset/update/{token}', [ForgotPasswordController::class, 'updatePassword'])->name('password.update');
+// Avoid clashing with Laravel's built-in password.update name
+Route::post('password/reset/update/{token}', [ForgotPasswordController::class, 'updatePassword'])->name('password.reset.update');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', [LoginController::class, 'logout']);

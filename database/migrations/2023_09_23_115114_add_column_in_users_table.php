@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('last_seen')->after('otp_expiry')->default(now());
-        });
+        if (!Schema::hasColumn('users', 'last_seen')) {
+            Schema::table('users', function (Blueprint $table) {
+                // Make it nullable; app logic can set/update this value
+                $table->dateTime('last_seen')->nullable()->after('otp_expiry');
+            });
+        }
     }
 
     /**
@@ -25,8 +28,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('last_seen')->after('otp_expiry')->default(now());
-        });
+        if (Schema::hasColumn('users', 'last_seen')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropColumn('last_seen');
+            });
+        }
     }
 };
