@@ -35,11 +35,11 @@
                         <div class="form-wrap-main pb-14">
                             <div class="primary-form-group">
                                 <div class="primary-form-group-wrap">
-                                    <label for="EmailAddress" class="form-label">{{ __('Email Address') }}</label>
-                                    <input type="text" class="primary-form-control" id="EmailAddress" name="email"
-                                        value="{{ old(' email') }}" placeholder="{{ __(' Your Email') }}" required />
+                                    <label for="NRP" class="form-label">NRP</label>
+                                    <input type="text" class="primary-form-control" id="NRP" name="nrp"
+                                        value="{{ old('nrp') }}" placeholder="Masukkan NRP Anda" required />
                                 </div>
-                                @error('email')
+                                @error('nrp')
                                     <span class="fs-12 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -138,17 +138,9 @@
 @push('script')
     <script>
         "use strict"
-        $('#adminCredentialShow').on('click', function() {
-            $('#EmailAddress').val('admin@gmail.com');
-            $('#Password').val('123456');
-        });
-        $('#superAdminCredentialShow').on('click', function() {
-            $('#EmailAddress').val('superadmin@gmail.com');
-            $('#Password').val('123456');
-        });
-        $('#userCredentialShow').on('click', function() {
-            $('#EmailAddress').val('alumni@gmail.com');
-            $('#Password').val('123456');
-        });
+        // Demo helpers (optional). Update with real NRP/password if needed.
+        $('#adminCredentialShow').on('click', function() { $('#NRP').val(''); $('#Password').val(''); });
+        $('#superAdminCredentialShow').on('click', function() { $('#NRP').val(''); $('#Password').val(''); });
+        $('#userCredentialShow').on('click', function() { $('#NRP').val(''); $('#Password').val(''); });
     </script>
 @endpush

@@ -8,6 +8,7 @@
             <h4 class="fs-24 fw-500 lh-34 text-black pb-16">{{ __($title) }}</h4>
             <div class="bd-c-ebedf0 bd-half bd-ra-25 bg-white h-100 p-30">
                 <div class="row">
+                    <!-- Fixed route name to match your actual routes -->
                     <input type="hidden" id="batch-route" value="{{ route('admin.setting.batches.index') }}">
                     <div class="col-lg-12">
                         <div class="customers__area bg-style mb-30">
@@ -24,17 +25,17 @@
                                 <div class="table-responsive zTable-responsive">
                                     <table class="table zTable" id="batchDataTable">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">
-                                                <div>{{ __('SL#') }}</div>
-                                            </th>
-                                            <th scope="col">
-                                                <div>{{ __('Name') }}</div>
-                                            </th>
-                                            <th scope="col" class="text-end">
-                                                <div>{{ __('Action') }}</div>
-                                            </th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">
+                                                    <div>{{ __('SL#') }}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div>{{ __('Name') }}</div>
+                                                </th>
+                                                <th scope="col" class="text-end">
+                                                    <div>{{ __('Action') }}</div>
+                                                </th>
+                                            </tr>
                                         </thead>
                                     </table>
                                 </div>
@@ -51,11 +52,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ __('Add Batch') }}</h5>
-                    <button type="button" class="border-0 btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                    <button type="button" class="border-0 btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <!-- Fixed route name to match your actual routes -->
                 <form class="ajax reset" action="{{ route('admin.setting.batches.store') }}" method="post"
-                      data-handler="commonResponseForModal">
+                    data-handler="commonResponseForModal">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -65,7 +66,7 @@
                                         <label for="currentPassword" class="form-label">{{ __('Name') }} <span
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="primary-form-control" name="name" required
-                                               placeholder="{{ __('Name') }}">
+                                            placeholder="{{ __('Name') }}">
                                     </div>
                                 </div>
                             </div>
@@ -73,8 +74,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit"
-                                class="fs-15 fw-500 lh-25 text-black py-10 border-0 px-26 bg-cdef84 bd-ra-12 hover-bg-one">{{
-                        __('Save') }}</button>
+                            class="fs-15 fw-500 lh-25 text-black py-10 border-0 px-26 bg-cdef84 bd-ra-12 hover-bg-one">{{ __('Save') }}</button>
                     </div>
                 </form>
             </div>
@@ -85,13 +85,12 @@
     <div class="modal fade" id="edit-modal" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-
+                <!-- Edit form will be loaded here via AJAX -->
             </div>
         </div>
     </div>
     <!-- Edit Modal section end -->
 @endsection
 @push('script')
-    <script src="{{asset('admin/js/batches.js')}}"></script>
+    <script src="{{ asset('admin/js/batches.js') }}"></script>
 @endpush
-

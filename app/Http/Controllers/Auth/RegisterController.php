@@ -103,6 +103,8 @@ class RegisterController extends Controller
         $rules = [
             "email" => ['required', 'email', 'max:255', 'unique:users'],
             "name" => ['required', 'string', 'max:255'],
+            "rank" => ['required','string','max:255'],
+            "nrp" => ['required','string','max:255','unique:users'],
             "mobile" => 'bail|required|min:6|unique:users',
             "batch_id" => 'nullable',
             "department_id" => 'nullable',
@@ -153,6 +155,8 @@ class RegisterController extends Controller
         $rules = [
             "email" => ['required', 'email', 'max:255', 'unique:users'],
             "name" => ['required', 'string', 'max:255'],
+            "rank" => ['required','string','max:255'],
+            "nrp" => ['required','string','max:255','unique:users'],
             "mobile" => 'bail|required|min:6|unique:users',
             "date_of_birth" => 'required|date|before:today',
             "gender" => 'bail|required',
@@ -194,6 +198,8 @@ class RegisterController extends Controller
         $newUser = User::create([
             'tenant_id' => $tenantId,
             'name' => $data['name'],
+            'rank' => $data['rank'] ?? null,
+            'nrp'  => $data['nrp'] ?? null,
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
@@ -244,6 +250,8 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'tenant_id' => $tenant->id,
                 'role' => USER_ROLE_ADMIN,
+                'rank' => $data['rank'] ?? null,
+                'nrp'  => $data['nrp'] ?? null,
                 'email' => $data['email'],
                 'mobile' => $data['mobile'],
                 'password' => Hash::make($data['password']),

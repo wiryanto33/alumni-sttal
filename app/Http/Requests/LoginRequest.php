@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required',
+            'nrp' => 'required',
             'password' => 'required|string'
         ];
     }
@@ -37,7 +37,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'The email field is required.',
+            'nrp.required' => 'The NRP field is required.',
         ];
     }
 }

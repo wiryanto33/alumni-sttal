@@ -8,7 +8,7 @@
         <h4 class="fs-24 fw-500 lh-34 text-black pb-16">{{ __($title) }}</h4>
         <div class="bd-c-ebedf0 bd-half bd-ra-25 bg-white h-100 p-30">
             <div class="row">
-                <input type="hidden" id="departments-route" value="{{ route('admin.setting.departments.index') }}">
+                <input type="hidden" id="department-route" value="{{ route('admin.setting.departments.index') }}">
                 <div class="col-lg-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="d-flex flex-wrap item-title justify-content-end">
@@ -104,7 +104,7 @@
     </div>
 </div>
 <!-- Edit Modal section end -->
-<input type="hidden" id="department-route" name="{{ route('admin.setting.departments.index') }}">
+<!-- removed duplicate/incorrect hidden input -->
 @endsection
 @push('script')
 <script src="{{ asset('admin/js/departments.js') }}"></script>

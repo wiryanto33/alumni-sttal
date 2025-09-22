@@ -61,7 +61,8 @@ class LoginController extends Controller
             $rules['g-recaptcha-response'] = ['required', 'recaptchav3:register,0.5'];
         } else {
             $rules = [
-                $this->username() => 'required|string',
+                // authenticate using NRP instead of email
+                'nrp' => 'required|string',
                 'password' => 'required|string',
             ];
         }
@@ -72,22 +73,25 @@ class LoginController extends Controller
     {
         Session::put('2fa_status', false);
 
-        $field = 'email';
+        // Use NRP as the login identifier
+        $field = 'nrp';
 
-        $request->merge([$field => $request->input('email')]);
+        $request->merge([$field => $request->input('nrp')]);
 
         $credentials = $request->only($field, 'password');
+        // Fallback: also try email with the same identifier to avoid locking out legacy users
+        $fallbackCredentials = ['email' => $request->input('nrp'), 'password' => $request->input('password')];
 
         $remember = request('remember');
 
-        if (!Auth::attempt($credentials, $remember)) {
-            return redirect("login")->withInput()->with('error',  __('Email or password is incorrect'));
+        if (!Auth::attempt($credentials, $remember) && !Auth::attempt($fallbackCredentials, $remember)) {
+            return redirect("login")->withInput()->with('error',  __('NRP or password is incorrect'));
         }
 
         $user = auth()->user();
         if($user->tenant_id != getTenantId() && (isCentralDomain() && !in_array($user->role, [USER_ROLE_ADMIN, USER_ROLE_SUPER_ADMIN]))){
             Auth::logout();
-            return redirect("login")->withInput()->with('error',  __('Email or password is incorrect'));
+            return redirect("login")->withInput()->with('error',  __('NRP or password is incorrect'));
         }
 
         if ($user->email_verification_status == STATUS_ACTIVE) {

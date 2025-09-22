@@ -95,12 +95,20 @@
                                 <h4 class="fs-18 fw-500 lh-22 text-1b1c17 pb-10">{{ __('Profile Bio') }}</h4>
                                 <p class="fs-14 fw-400 lh-24 text-707070 pb-12">{!! $user->alumni?->about_me !!}</p>
                             </div>
-                            <!-- Personal Info -->
-                            <ul class="zList-one">
-                                <li>
-                                    <p>{{ __('Full Name') }} :</p>
-                                    <p>{{ $user->name }}</p>
-                                </li>
+                                <!-- Personal Info -->
+                                <ul class="zList-one">
+                                    <li>
+                                        <p>{{ __('Full Name') }} :</p>
+                                        <p>{{ $user->name }}</p>
+                                    </li>
+                                    <li>
+                                        <p>{{ __('Rank / Corps') }} :</p>
+                                        <p>{{ $user->rank }}</p>
+                                    </li>
+                                    <li>
+                                        <p>{{ __('NRP') }} :</p>
+                                        <p>{{ $user->nrp }}</p>
+                                    </li>
                                 <li>
                                     <p>{{ __('Nick Name') }} :</p>
                                     <p>{{ $user->nick_name }}</p>

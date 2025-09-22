@@ -38,6 +38,28 @@
                                     <span class="fs-12 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="primary-form-group">
+                                <div class="primary-form-group-wrap">
+                                    <label for="rank" class="form-label">Pangkat Korps<span
+                                            class="text-danger"> *</span></label>
+                                    <input type="text" class="primary-form-control" id="rank"
+                                           value="{{ old('rank') }}" name="rank" placeholder="Contoh: Serda Korps Polisi Militer" />
+                                </div>
+                                @error('rank')
+                                <span class="fs-12 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="primary-form-group">
+                                <div class="primary-form-group-wrap">
+                                    <label for="nrp" class="form-label">NRP<span
+                                            class="text-danger"> *</span></label>
+                                    <input type="text" class="primary-form-control" id="nrp"
+                                           value="{{ old('nrp') }}" name="nrp" placeholder="Masukkan NRP" />
+                                </div>
+                                @error('nrp')
+                                <span class="fs-12 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                             @if(!isCentralDomain() || !isAddonInstalled('ALUSAAS'))
                                 @if($regForm->enable_batch)
                             <div class="primary-form-group">

@@ -91,6 +91,14 @@
                                         <p>{{ $user->name }}</p>
                                     </li>
                                     <li>
+                                        <p>{{ __('Rank / Corps') }} :</p>
+                                        <p>{{ $user->rank }}</p>
+                                    </li>
+                                    <li>
+                                        <p>{{ __('NRP') }} :</p>
+                                        <p>{{ $user->nrp }}</p>
+                                    </li>
+                                    <li>
                                         <p>{{ __('Nick Name') }} :</p>
                                         <p>{{ $user->nick_name }}</p>
                                     </li>
