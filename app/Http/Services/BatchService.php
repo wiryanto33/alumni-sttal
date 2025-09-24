@@ -21,14 +21,13 @@ class BatchService
         }
 
         $batches = Batch::query();
-        // Apply tenant scope only when available and column exists
         if (!is_null($tenantId)) {
             $batches->where('tenant_id', $tenantId);
         }
-
         $batches->orderBy('id', 'DESC');
 
-        return datatables($batches)
+        // Build DataTables payload and force echo back of draw
+        $payload = datatables()->of($batches)
             ->addIndexColumn()
             ->addColumn('action', function ($data){
                 return '<ul class="align-items-center cg-5 d-flex justify-content-end">
@@ -43,7 +42,10 @@ class BatchService
                         </ul>';
             })
             ->rawColumns(['action'])
-            ->make(true);
+            ->toArray();
+
+        $payload['draw'] = (int) request()->get('draw', 1);
+        return response()->json($payload);
     }
 
 
