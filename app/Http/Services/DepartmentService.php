@@ -13,8 +13,15 @@ class DepartmentService
 
     public function getAllData()
     {
-        $departments = Department::where('tenant_id', getTenantId())->orderBy('id', 'desc');
-        return datatables($departments)
+        $tenantId = null;
+        try { $tenantId = getTenantId(); } catch (\Throwable $e) { $tenantId = null; }
+
+        $departments = Department::query()->orderBy('id', 'desc');
+        if (!is_null($tenantId)) {
+            $departments->where('tenant_id', $tenantId);
+        }
+
+        $payload = datatables()->of($departments)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 return '<ul class="d-flex align-items-center cg-5 justify-content-center">
@@ -29,7 +36,10 @@ class DepartmentService
             </ul>';
             })
             ->rawColumns(['action'])
-            ->make(true);
+            ->toArray();
+
+        $payload['draw'] = (int) request()->get('draw', 1);
+        return response()->json($payload);
     }
 
 

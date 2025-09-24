@@ -13,8 +13,15 @@ class PassingYearService
 
     public function getAllData()
     {
-        $passingYears = PassingYear::where('tenant_id', getTenantId())->orderBy('id', 'desc');
-        return datatables($passingYears)
+        $tenantId = null;
+        try { $tenantId = getTenantId(); } catch (\Throwable $e) { $tenantId = null; }
+
+        $passingYears = PassingYear::query()->orderBy('id', 'desc');
+        if (!is_null($tenantId)) {
+            $passingYears->where('tenant_id', $tenantId);
+        }
+
+        $payload = datatables()->of($passingYears)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 return '<ul class="d-flex align-items-center cg-5 justify-content-center">
@@ -29,7 +36,10 @@ class PassingYearService
             </ul>';
             })
             ->rawColumns(['action'])
-            ->make(true);
+            ->toArray();
+
+        $payload['draw'] = (int) request()->get('draw', 1);
+        return response()->json($payload);
     }
 
 

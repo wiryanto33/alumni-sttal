@@ -16,8 +16,8 @@ class LanguageService
 
     public function getAllData()
     {
-        $currencies = Language::orderBy('id', 'DESC')->select('id', 'language', 'iso_code', 'default', 'rtl', 'flag_id', 'font');
-        return datatables($currencies)
+        $query = Language::orderBy('id', 'DESC')->select('id', 'language', 'iso_code', 'default', 'rtl', 'flag_id', 'font');
+        $payload = datatables()->of($query)
             ->addIndexColumn()
             ->editColumn('language', function ($data) {
                 $language = $data->language;
@@ -70,7 +70,10 @@ class LanguageService
                 ';
             })
             ->rawColumns(['action', 'language', 'flag', 'font', 'rtl'])
-            ->make(true);
+            ->toArray();
+
+        $payload['draw'] = (int) request()->get('draw', 1);
+        return response()->json($payload);
     }
 
 

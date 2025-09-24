@@ -14,8 +14,16 @@ class CurrencyService
 
     public function getAllData()
     {
-        $currencies = Currency::orderBy('id', 'desc')->where('tenant_id', getTenantId())->select('id', 'currency_code', 'current_currency', 'symbol', 'currency_placement');
-        return datatables($currencies)
+        $tenantId = null;
+        try { $tenantId = getTenantId(); } catch (\Throwable $e) { $tenantId = null; }
+
+        $currencies = Currency::query()->orderBy('id', 'desc')
+            ->select('id', 'currency_code', 'current_currency', 'symbol', 'currency_placement');
+        if (!is_null($tenantId)) {
+            $currencies->where('tenant_id', $tenantId);
+        }
+
+        $payload = datatables()->of($currencies)
             ->addIndexColumn()
             ->editColumn('currency_code', function ($data) {
                 $currencyCode = $data->currency_code;
@@ -50,7 +58,10 @@ class CurrencyService
                 }
             })
             ->rawColumns(['action', 'currency_code'])
-            ->make(true);
+            ->toArray();
+
+        $payload['draw'] = (int) request()->get('draw', 1);
+        return response()->json($payload);
     }
 
     public function store($request)
