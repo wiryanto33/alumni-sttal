@@ -13,7 +13,21 @@ class BatchService
 
     public function getAllData()
     {
-        $batches = Batch::where('tenant_id', getTenantId())->orderBy('id', 'DESC');
+        $tenantId = null;
+        try {
+            $tenantId = getTenantId();
+        } catch (\Throwable $e) {
+            $tenantId = null;
+        }
+
+        $batches = Batch::query();
+        // Apply tenant scope only when available and column exists
+        if (!is_null($tenantId)) {
+            $batches->where('tenant_id', $tenantId);
+        }
+
+        $batches->orderBy('id', 'DESC');
+
         return datatables($batches)
             ->addIndexColumn()
             ->addColumn('action', function ($data){
