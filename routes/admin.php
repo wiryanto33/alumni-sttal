@@ -249,8 +249,8 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
         Route::post('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('update.translate');
         Route::post('delete/{id}', [LanguageController::class, 'delete'])->name('delete');
         Route::post('update-language/{id}', [LanguageController::class, 'updateLanguage'])->name('update-language');
-        Route::get('translate/{id}/{iso_code?}', [LanguageController::class, 'translateLanguage'])->name('translate');
-        Route::get('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('update.translate');
+        Route::get('translate/{id}/{iso_code?}', [LanguageController::class, 'translateLanguage'])->name('translate.locale');
+        Route::get('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('update.translate.form');
         Route::post('import', [LanguageController::class, 'import'])->name('import')->middleware('isDemo');
     });
 });
