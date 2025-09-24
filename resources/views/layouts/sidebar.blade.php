@@ -215,6 +215,7 @@
                             <span class="">{{ __('Alumni') }}</span>
                         </a>
                     </li>
+                    @if (config('features.membership'))
                     <li>
                         <a href="{{ route('membership-package') }}"
                            class="d-flex align-items-center cg-10 {{ $activeMembershipPack ?? '' }}">
@@ -243,6 +244,7 @@
                             <span>{{ __('Membership') }}</span>
                         </a>
                     </li>
+                    @endif
                     @if(isAddonInstalled('ALUCOMMITTEE'))
                         <li>
                             <a href="#manage-alu-election" data-bs-toggle="collapse" role="button"
@@ -397,6 +399,7 @@
                                 </div>
                             </li>
                         @endcan
+                        @if (config('features.membership'))
                         @can('Manage Membership')
                             <li>
                                 <a href="#membership-admin" data-bs-toggle="collapse" role="button"
@@ -445,6 +448,7 @@
                                 </div>
                             </li>
                         @endcan
+                        @endif
                         @can('Manage Notice')
                             <li>
                                 <a href="#manage-notice-menu" data-bs-toggle="collapse" role="button"
@@ -547,14 +551,40 @@
                                         <li><a class="{{ $activeEventNotice ?? '' }}"
                                                href="{{route('admin.transactions.event.list')}}">{{ __('Event Transaction') }}</a>
                                         </li>
-                                        <li><a class="{{ $activeMembershipNotice ?? '' }}"
-                                               href="{{route('admin.transactions.membership.list')}}">{{ __('Membership Transaction') }}</a>
-                                        </li>
+                                        @if (config('features.membership'))
+                                            <li><a class="{{ $activeMembershipNotice ?? '' }}"
+                                                   href="{{route('admin.transactions.membership.list')}}">{{ __('Membership Transaction') }}</a>
+                                            </li>
+                                        @endif
                                         @if(isAddonInstalled('ALUSAAS'))
                                             <li><a class="{{ $activeAdminTransaction ?? '' }}"
                                                    href="{{route('admin.subscription.transaction.list')}}">{{ __('Subscription Transaction') }}</a>
                                             </li>
                                         @endif
+                                    </ul>
+                                </div>
+                            </li>
+                        @endcan
+                        {{-- Built-in Campaign donations (no addon) --}}
+                        @can('Manage Donation')
+                            <li>
+                                <a href="#manage-simple-donation" data-bs-toggle="collapse" role="button"
+                                   aria-expanded="false"
+                                   aria-controls="manage-simple-donation"
+                                   class="d-flex align-items-center cg-10 collapsed">
+                                    <div class="d-flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                            <path d="M2.6 12.5c0-4.4 0-6.6 1.25-8.07A5 5 0 0 1 4.43 3.85C5.89 2.6 8.09 2.6 12.5 2.6s6.61 0 8.07 1.25c.21.18.41.37.6.58 1.25 1.46 1.25 3.67 1.25 8.07s0 6.61-1.25 8.07c-.19.21-.39.4-.6.58-1.46 1.25-3.67 1.25-8.07 1.25s-6.61 0-8.07-1.25a5 5 0 0 1-.58-.58C2.6 19.11 2.6 16.9 2.6 12.5Z" stroke="white" stroke-opacity="0.7" stroke-width="1.5"/>
+                                            <path d="M12.5 7v10M7.5 12.5h10" stroke="white" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <span class="">{{ __('Donations') }}</span>
+                                </a>
+                                <div class="collapse" id="manage-simple-donation" data-bs-parent="#sidebarMenu">
+                                    <ul class="zSidebar-submenu">
+                                        <li><a href="{{ route('admin.campaign-categories.index') }}">{{ __('Categories') }}</a></li>
+                                        <li><a href="{{ route('admin.campaigns.index') }}">{{ __('Campaigns') }}</a></li>
+                                        <li><a href="{{ route('admin.campaign-donations.index') }}">{{ __('Donations') }}</a></li>
                                     </ul>
                                 </div>
                             </li>

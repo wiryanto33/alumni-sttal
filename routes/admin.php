@@ -31,6 +31,10 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Website\WebsiteSettingController;
 use App\Http\Controllers\Admin\VersionUpdateController;
 use App\Http\Controllers\Admin\AddonUpdateController;
+use App\Http\Controllers\Admin\SimpleDonationController as AdminSimpleDonationController;
+use App\Http\Controllers\Admin\CampaignCategoryController as AdminCampaignCategoryController;
+use App\Http\Controllers\Admin\CampaignController as AdminCampaignController;
+use App\Http\Controllers\Admin\CampaignDonationController as AdminCampaignDonationController;
 use App\Http\Controllers\addon\saas\admin\OrderController;
 use App\Http\Controllers\addon\saas\admin\SubscriptionController;
 use App\Http\Controllers\addon\saas\admin\CustomDomainRequestController;
@@ -60,15 +64,17 @@ Route::group(['prefix' => 'event', 'as' => 'event.', 'middleware' => ['can:Manag
 });
 // Event Route End
 
-// Membership Route Start
-Route::group(['prefix' => 'membership', 'as' => 'membership.', 'middleware' => ['can:Manage Membership']], function () {
-    Route::get('index', [MembershipController::class, 'index'])->name('index');
-    Route::post('store', [MembershipController::class, 'store'])->name('store');
-    Route::get('edit/{slug}', [MembershipController::class, 'edit'])->name('edit');
-    Route::post('update/{slug}', [MembershipController::class, 'update'])->name('update');
-    Route::post('delete/{id}', [MembershipController::class, 'delete'])->name('delete');
-    Route::get('list', [MembershipController::class, 'list'])->name('list');
-});
+// Membership Route Start (disabled when feature is off)
+if (config('features.membership')) {
+    Route::group(['prefix' => 'membership', 'as' => 'membership.', 'middleware' => ['can:Manage Membership']], function () {
+        Route::get('index', [MembershipController::class, 'index'])->name('index');
+        Route::post('store', [MembershipController::class, 'store'])->name('store');
+        Route::get('edit/{slug}', [MembershipController::class, 'edit'])->name('edit');
+        Route::post('update/{slug}', [MembershipController::class, 'update'])->name('update');
+        Route::post('delete/{id}', [MembershipController::class, 'delete'])->name('delete');
+        Route::get('list', [MembershipController::class, 'list'])->name('list');
+    });
+}
 // Membership Route End
 
 // JobPost Route Start
@@ -171,11 +177,11 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
     });
 
     Route::get('mail-configuration', [SettingController::class, 'mailConfiguration'])->name('mail-configuration');
-    Route::post('mail-configuration', [SettingController::class, 'mailConfiguration'])->name('mail-configuration');
+    Route::post('mail-configuration', [SettingController::class, 'mailConfiguration'])->name('mail-configuration.update');
     Route::post('mail-test', [SettingController::class, 'mailTest'])->name('mail.test');
 
     Route::get('sms-configuration', [SettingController::class, 'smsConfiguration'])->name('sms-configuration');
-    Route::post('sms-configuration', [SettingController::class, 'smsConfigurationStore'])->name('sms-configuration');
+    Route::post('sms-configuration', [SettingController::class, 'smsConfigurationStore'])->name('sms-configuration.store');
     Route::post('sms-test', [SettingController::class, 'smsTest'])->name('sms.test');
 
 
@@ -207,7 +213,7 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
 
     Route::get('email-template', [EmailTemplateController::class, 'emailTemplate'])->name('email-template');
     Route::get('email-edit', [EmailTemplateController::class, 'emailTempEdit'])->name('email-edit');
-    Route::get('email-edit/{id}', [EmailTemplateController::class, 'emailTempEdit'])->name('email-edit');
+    Route::get('email-edit/{id}', [EmailTemplateController::class, 'emailTempEdit'])->name('email-edit.show');
     Route::post('email-temp-update/{id}', [EmailTemplateController::class, 'emailTempUpdate'])->name('email-temp-update');
 
     Route::group(['prefix' => 'batch', 'as' => 'batches.', 'middleware' => ['can:Manage Application Setting']], function () {
@@ -310,8 +316,38 @@ Route::group(['prefix' => 'transactions', 'as' => 'transactions.', 'middleware' 
     Route::get('pending-list', [TransactionController::class, 'pendingTransaction'])->name('pending.list');
     Route::get('all-transactions', [TransactionController::class, 'allTransaction'])->name('all.list');
     Route::get('event-transaction', [TransactionController::class, 'eventTransaction'])->name('event.list');
-    Route::get('membership-transaction', [TransactionController::class, 'membershipTransaction'])->name('membership.list');
+    if (config('features.membership')) {
+        Route::get('membership-transaction', [TransactionController::class, 'membershipTransaction'])->name('membership.list');
+    }
     Route::post('change-transaction-status', [TransactionController::class, 'transactionChangeStatus'])->name('change-status');
+});
+
+// Simple Donations (bank transfer / midtrans)
+Route::group(['prefix' => 'simple-donations', 'as' => 'simple-donations.', 'middleware' => ['can:Manage Donation']], function () {
+    Route::get('/', [AdminSimpleDonationController::class, 'index'])->name('index');
+    Route::post('{id}/mark-paid', [AdminSimpleDonationController::class, 'markPaid'])->name('mark-paid');
+});
+
+// Campaigns (ALUDONATION-like, built-in)
+Route::group(['prefix' => 'campaign-categories', 'as' => 'campaign-categories.', 'middleware' => ['can:Manage Donation']], function () {
+    Route::get('/', [AdminCampaignCategoryController::class, 'index'])->name('index');
+    Route::post('store', [AdminCampaignCategoryController::class, 'store'])->name('store');
+    Route::get('edit/{id}', [AdminCampaignCategoryController::class, 'edit'])->name('edit');
+    Route::post('update/{id}', [AdminCampaignCategoryController::class, 'update'])->name('update');
+    Route::post('delete/{id}', [AdminCampaignCategoryController::class, 'delete'])->name('delete');
+});
+
+Route::group(['prefix' => 'campaigns', 'as' => 'campaigns.', 'middleware' => ['can:Manage Donation']], function () {
+    Route::get('/', [AdminCampaignController::class, 'index'])->name('index');
+    Route::get('create', [AdminCampaignController::class, 'create'])->name('create');
+    Route::post('store', [AdminCampaignController::class, 'store'])->name('store');
+    Route::get('edit/{id}', [AdminCampaignController::class, 'edit'])->name('edit');
+    Route::post('update/{id}', [AdminCampaignController::class, 'update'])->name('update');
+    Route::post('delete/{id}', [AdminCampaignController::class, 'delete'])->name('delete');
+});
+
+Route::group(['prefix' => 'campaign-donations', 'as' => 'campaign-donations.', 'middleware' => ['can:Manage Donation']], function () {
+    Route::get('/', [AdminCampaignDonationController::class, 'index'])->name('index');
 });
 
 

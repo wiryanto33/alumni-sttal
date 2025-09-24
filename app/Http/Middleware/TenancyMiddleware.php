@@ -21,6 +21,11 @@ class TenancyMiddleware
 
     public function handle(Request $request, Closure $next)
     {
+        // If tenancy is disabled, allow the request to proceed
+        if (!config('features.tenancy')) {
+            return $next($request);
+        }
+
         $host = request()->getHost();
         $domain = Domain::where('domain', $host)->first();
 

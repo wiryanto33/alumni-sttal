@@ -22,6 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Midtrans notifications
+Route::match(['POST'], 'midtrans/notify', [\App\Http\Controllers\Frontend\SimpleDonationController::class, 'notify'])->name('donation.midtrans.notify');
+Route::match(['POST'], 'midtrans/campaign/notify', [\App\Http\Controllers\Frontend\CampaignDonationController::class, 'notify'])->name('donation.campaign.midtrans.notify');
+
 //call back
 Route::match(array('GET', 'POST'), 'verify', [OrderController::class, 'verify'])->name('payment.verify');
 Route::match(array('GET', 'POST'), 'donation-verify', [DonationController::class, 'verify'])->name('donation-payment.verify');

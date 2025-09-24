@@ -67,6 +67,47 @@
     </section>
     <!-- End Join with community -->
 
+    <!-- Start Donation Campaigns -->
+    @if(isset($homeCampaigns) && count($homeCampaigns))
+        <section class="pt-0 pb-110">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-end mb-30">
+                    <div>
+                        <span class="d-inline-block py-10 px-18 bg-color4 bd-ra-12 fs-16 fw-500 lh-16 text-black-color mb-10">{{ __('Donation') }}</span>
+                        <h4 class="fs-36 fw-600 lh-36 text-black mb-0">{{ __('Support Our Campaigns') }}</h4>
+                    </div>
+                    <a href="{{ route('donation.campaigns.index') }}" class="fs-16 fw-600 lh-16 text-black-color">{{ __('View All') }} <i class="fa-solid fa-long-arrow-right"></i></a>
+                </div>
+
+                <div class="row g-24">
+                    @foreach($homeCampaigns as $campaign)
+                        <div class="col-md-6 col-lg-4">
+                            <div class="bd-one bd-c-black-10 bd-ra-14 overflow-hidden bg-white h-100 d-flex flex-column">
+                                <a href="{{ route('donation.campaigns.show',$campaign->slug) }}" class="ratio ratio-16x9 d-block">
+                                    <img class="w-100 h-100 object-fit-cover" src="{{ getFileUrl($campaign->image) }}" alt="{{ $campaign->title }}">
+                                </a>
+                                <div class="p-20 d-flex flex-column flex-grow-1">
+                                    <a href="{{ route('donation.campaigns.show',$campaign->slug) }}" class="fs-20 fw-600 lh-28 text-black-color mb-6 line-clamp-2">{{ $campaign->title }}</a>
+                                    <p class="fs-14 fw-500 lh-22 text-para-color mb-12 line-clamp-2">{!! \Illuminate\Support\Str::limit(strip_tags($campaign->details), 90) !!}</p>
+                                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                                        <div>
+                                            @if($campaign->minimum_amount)
+                                                <small class="d-block text-para-color">{{ __('Min.') }}</small>
+                                                <span class="fs-16 fw-600 text-black-color">{{ showPrice($campaign->minimum_amount) }}</span>
+                                            @endif
+                                        </div>
+                                        <a href="{{ route('donation.campaigns.show',$campaign->slug) }}" class="py-8 px-16 bd-one bd-c-primary-color bd-ra-10 bg-primary-color fs-14 fw-600 lh-22 text-black-color hover-color-white hover-bg-color-transparent hover-border-color-white">{{ __('Donate') }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+    <!-- End Donation Campaigns -->
+
     @if(isAddonInstalled('ALUCOMMITTEE'))
     <!-- Start Welcome Speech -->
     <section class="pb-110">

@@ -67,11 +67,11 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
     Route::get('cache-update/{id}', [SettingController::class, 'cacheUpdate'])->name('cache-update');
 
     Route::get('mail-configuration', [SettingController::class, 'mailConfiguration'])->name('mail-configuration');
-    Route::post('mail-configuration', [SettingController::class, 'mailConfiguration'])->name('mail-configuration');
+    Route::post('mail-configuration', [SettingController::class, 'mailConfiguration'])->name('mail-configuration.update');
     Route::post('mail-test', [SettingController::class, 'mailTest'])->name('mail.test');
 
     Route::get('sms-configuration', [SettingController::class, 'smsConfiguration'])->name('sms-configuration');
-    Route::post('sms-configuration', [SettingController::class, 'smsConfigurationStore'])->name('sms-configuration');
+    Route::post('sms-configuration', [SettingController::class, 'smsConfigurationStore'])->name('sms-configuration.store');
     Route::post('sms-test', [SettingController::class, 'smsTest'])->name('sms.test');
 
     Route::post('common-settings-update', [SettingController::class, 'commonSettingUpdate'])->name('common.settings.update')->middleware('isDemo');
@@ -85,8 +85,8 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
         Route::post('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('update.translate');
         Route::post('delete/{id}', [LanguageController::class, 'delete'])->name('delete');
         Route::post('update-language/{id}', [LanguageController::class, 'updateLanguage'])->name('update-language');
-        Route::get('translate/{id}/{iso_code?}', [LanguageController::class, 'translateLanguage'])->name('translate');
-        Route::get('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('update.translate');
+        Route::get('translate/{id}/{iso_code?}', [LanguageController::class, 'translateLanguage'])->name('translate.locale');
+        Route::get('update-translate/{id}', [LanguageController::class, 'updateTranslate'])->name('update.translate.form');
         Route::post('import', [LanguageController::class, 'import'])->name('import')->middleware('isDemo');
     });
 

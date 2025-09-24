@@ -11,8 +11,8 @@ database:
 commands:
   - "composer install --no-dev --optimize-autoloader"
   - "cp .env.example .env"
-  - "php artisan key:generate"
   - "npm run production"
+  - "php artisan key:generate"
   - "composer require spatie/laravel-permission"
   - "php artisan vendor:publish --all"
   - "php artisan migrate:force --seed"

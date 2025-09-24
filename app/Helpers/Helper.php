@@ -1119,16 +1119,21 @@ if (!function_exists('userCurrentPackage')) {
 
 function getTenantId()
 {
+    // If tenancy features are disabled, fall back to single-tenant (id = 1)
+    if (!config('features.tenancy')) {
+        return 1;
+    }
+
     if (isCentralDomain()) {
-        if(isAddonInstalled('ALUSAAS')){
+        if (isAddonInstalled('ALUSAAS')) {
             return auth()->user()?->tenant_id;
-        }else{
+        } else {
             return \Stancl\Tenancy\Database\Models\Domain::first()->tenant_id;
         }
-    }else{
-        if(isAddonInstalled('ALUSAAS')){
+    } else {
+        if (isAddonInstalled('ALUSAAS')) {
             return tenant('id');
-        }else{
+        } else {
             return \Stancl\Tenancy\Database\Models\Domain::first()->tenant_id;
         }
     }

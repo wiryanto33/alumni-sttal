@@ -96,6 +96,11 @@ class TenancyServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        // If tenancy is disabled, skip registering tenant-specific routes and middleware
+        if (!config('features.tenancy')) {
+            return;
+        }
+
         $this->bootEvents();
 
         if (isAddonInstalled('ALUSAAS')) {

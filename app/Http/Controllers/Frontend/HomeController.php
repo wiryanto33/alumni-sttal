@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Frontend\HomeService;
 use App\Models\Batch;
+use App\Models\Campaign;
 use App\Models\CommitteeCategory;
 use App\Models\Department;
 use App\Models\User;
@@ -34,6 +35,12 @@ class HomeController extends Controller
         $data['photoGalleries'] = $this->homeService->getPhotoGalleries();
         $data['news'] = $this->homeService->getNews(3);
         $data['alumnus'] = $this->homeService->getAlumni(8);
+        // Latest donation campaigns to display on home
+        $data['homeCampaigns'] = Campaign::where('tenant_id', getTenantId())
+            ->where('status', STATUS_ACTIVE)
+            ->orderByDesc('id')
+            ->take(6)
+            ->get();
         $data['totalAlumni'] = User::where('users.tenant_id', getTenantId())->where('role',USER_ROLE_ALUMNI)->where('status',STATUS_ACTIVE)->count();
         $data['totalDepartments'] = Department::where('tenant_id', getTenantId())->count();
         $data['totalSessions'] = Batch::where('tenant_id', getTenantId())->count();

@@ -106,8 +106,10 @@ Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
 });
 // Post route start
 
-// Membership Route Start
+// Membership Route Start (disabled when feature is off)
+if (config('features.membership')) {
     Route::get('membership-package', [MembershipController::class, 'membershipPackage'])->name('membership-package');
+}
 // Membership Route End
 
 //notification  route start

@@ -5,7 +5,6 @@ use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\JobController;
-use App\Http\Controllers\Frontend\MembershipController;
 use App\Http\Controllers\Frontend\NewsController;
 use App\Http\Controllers\Frontend\NewsSubscriptionLetterController;
 use App\Http\Controllers\Frontend\NoticeController;
@@ -43,8 +42,22 @@ Route::get('news-view-details/{slug}', [NewsController::class, 'newsDetails'])->
 Route::get('our-notice', [NoticeController::class, 'notice'])->name('our.notice');
 Route::get('notice-view-details/{slug}', [NoticeController::class, 'noticeDetails'])->name('notice.view.details');
 
-// Membership
-Route::get('all-membership', [MembershipController::class, 'membership'])->name('all.membership');
+// Donation Campaigns (ALUDONATION-like)
+Route::get('donations', [\App\Http\Controllers\Frontend\CampaignDonationController::class, 'index'])->name('donation.campaigns.index');
+Route::get('donations/{slug}', [\App\Http\Controllers\Frontend\CampaignDonationController::class, 'show'])->name('donation.campaigns.show');
+Route::post('donations/{slug}/donate', [\App\Http\Controllers\Frontend\CampaignDonationController::class, 'donate'])->name('donation.campaigns.donate');
+Route::get('donations/finish/{order_id}', [\App\Http\Controllers\Frontend\CampaignDonationController::class, 'finish'])->name('donation.campaign.callback.finish');
+
+// Simple Donation
+Route::get('donate', [\App\Http\Controllers\Frontend\SimpleDonationController::class, 'form'])->name('donation.form');
+Route::post('donate', [\App\Http\Controllers\Frontend\SimpleDonationController::class, 'create'])->name('donation.create');
+Route::get('donation/thank-you', [\App\Http\Controllers\Frontend\SimpleDonationController::class, 'thankyou'])->name('donation.thankyou');
+Route::get('donation/finish/{order_id}', [\App\Http\Controllers\Frontend\SimpleDonationController::class, 'finish'])->name('donation.callback.finish');
+
+// Membership (disabled when feature is off)
+if (config('features.membership')) {
+    Route::get('all-membership', [\App\Http\Controllers\Frontend\MembershipController::class, 'membership'])->name('all.membership');
+}
 
 // job
 Route::get('all-job', [JobController::class, 'job'])->name('all.job');
