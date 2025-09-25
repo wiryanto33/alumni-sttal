@@ -116,8 +116,16 @@ class AppServiceProvider extends ServiceProvider
                 Gate::before(function ($user, $ability) {
                     return $user->is_alumni ? true : null;
                 });
-                if (getOption('force_ssl', 0)){
-                    URL::forceScheme('https');
+
+                if (!app()->runningInConsole()) {
+                    $rootUrl = request()->getSchemeAndHttpHost();
+                    if (!empty($rootUrl)) {
+                        config(['app.url' => $rootUrl]);
+                        URL::forceRootUrl($rootUrl);
+                        if (getOption('force_ssl', 0) || request()->isSecure()) {
+                            URL::forceScheme('https');
+                        }
+                    }
                 }
             }
         } catch (\Exception $e) {
