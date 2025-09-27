@@ -25,7 +25,7 @@ class StoryService
     public function allPendingList()
     {
         $pendingStory = Story::orderBy('id', 'desc')->where('status', STATUS_PENDING)->where('tenant_id', getTenantId());
-        return datatables($pendingStory)
+        return datatables()->eloquent($pendingStory)
             ->addIndexColumn()
             ->addColumn('thumbnail', function ($data) {
                 return '<img src="' . getFileUrl($data->thumbnail) . '" alt="icon" class="rounded avatar-xs max-h-35">';
@@ -51,16 +51,16 @@ class StoryService
 
     public function getMyStoryList()
     {
-        $features = Story::where('user_id', auth()->id())->where('tenant_id', getTenantId())->orderBy('id', 'desc')->get();
-        return datatables($features)
+        $features = Story::where('user_id', auth()->id())->where('tenant_id', getTenantId())->orderBy('id', 'desc');
+        return datatables()->eloquent($features)
             ->addIndexColumn()
             ->addColumn('thumbnail', function ($data) {
                 return '<img src="' . getFileUrl($data->thumbnail) . '" alt="icon" class="rounded avatar-xs max-h-35">';
             })
             ->addColumn('status', function ($data) {
-                if($data->status == STATUS_ACTIVE){
+                if ($data->status == STATUS_ACTIVE) {
                     return '<p class="d-inline-block py-6 px-10 bd-ra-6 fs-14 fw-500 lh-16 text-0fa958 bg-0fa958-10">' . __("Published") . '</p>';
-                }else{
+                } else {
                     return '<p class="d-inline-block py-6 px-10 bd-ra-6 fs-14 fw-500 lh-16 text-f5b40a bg-f5b40a-10">' . __("Pending") . '</p>';
                 }
             })
@@ -83,8 +83,8 @@ class StoryService
 
     public function getAllStoryList()
     {
-        $features = Story::where('status', JOB_STATUS_APPROVED)->orderBy('id', 'desc')->get();
-        return datatables($features)
+        $features = Story::where('status', JOB_STATUS_APPROVED)->orderBy('id', 'desc');
+        return datatables()->eloquent($features)
             ->addIndexColumn()
             ->addColumn('company_logo', function ($data) {
                 return '<img src="' . getFileUrl($data->company_logo) . '" alt="icon" class="rounded avatar-xs max-h-35">';
@@ -118,7 +118,6 @@ class StoryService
                     </li>
                 </ul>';
                 }
-
             })
             ->rawColumns(['company_logo', 'action', 'title', 'salary', 'application_deadline'])
             ->make(true);
@@ -127,8 +126,8 @@ class StoryService
 
     public function getPendingStoryList()
     {
-        $features = Story::where('status', JOB_STATUS_PENDING)->where('tenant_id', getTenantId())->orderBy('id', 'desc')->get();
-        return datatables($features)
+        $features = Story::where('status', JOB_STATUS_PENDING)->where('tenant_id', getTenantId())->orderBy('id', 'desc');
+        return datatables()->eloquent($features)
             ->addIndexColumn()
             ->addColumn('company_logo', function ($data) {
                 return '<img src="' . getFileUrl($data->company_logo) . '" alt="icon" class="rounded avatar-xs max-h-35">';

@@ -14,8 +14,8 @@ class ImageGalleryService
 
     public function getAllData()
     {
-        $imageGalleryes = PhotoGallery::where('tenant_id', getTenantId())->orderBy('id', 'DESC');
-        return datatables($imageGalleryes)
+    $imageGalleryes = PhotoGallery::where('tenant_id', getTenantId())->orderBy('id', 'DESC');
+    return datatables()->eloquent($imageGalleryes)
             ->addIndexColumn()
             ->addColumn('photo', function ($data) {
                 return '<img src="' . getFileUrl($data->photo) . '" alt="icon" class="max-h-35 rounded avatar-xs tbl-user-image">';

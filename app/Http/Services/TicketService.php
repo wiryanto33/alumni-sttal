@@ -13,11 +13,12 @@ class TicketService
 
     public function list()
     {
-        $ticket = EventTicket::where('user_id', auth()->id())->where('tenant_id', getTenantId())
+        $ticketQuery = EventTicket::where('user_id', auth()->id())
+            ->where('tenant_id', getTenantId())
             ->with('event')
-            ->orderBy('event_id', 'DESC')
-            ->get();
-             return datatables($ticket)
+            ->orderBy('event_id', 'DESC');
+
+        return datatables()->eloquent($ticketQuery)
             ->addIndexColumn()
             ->addColumn('event', function ($data) {
                 return '<p>' . htmlspecialchars($data->event->title) . '</p>';
@@ -35,10 +36,10 @@ class TicketService
                     return '<span class="zBadge-paid">Paid</span>';
                 }
             })
-            ->addColumn('action', function ($data){
+            ->addColumn('action', function ($data) {
                 return '<ul class="d-flex align-items-center cg-5 justify-content-center">
                             <li class="d-flex gap-2">
-                                <a onclick="getTicketModal(\'' . route('event.single-ticket', $data->id) . '\'' . ', \'#ticketViewModal\')" href="#" class="d-block text-center min-w-130 text-decoration-underline fw-600 text-1b1c17" data-bs-toggle="modal" data-bs-target="#ticketViewModal">'.__("Download").'</a>
+                                <a onclick="getTicketModal(\'' . route('event.single-ticket', $data->id) . '\'' . ', \'#ticketViewModal\')" href="#" class="d-block text-center min-w-130 text-decoration-underline fw-600 text-1b1c17" data-bs-toggle="modal" data-bs-target="#ticketViewModal">' . __("Download") . '</a>
                             </li>
                         </ul>';
             })
@@ -50,5 +51,4 @@ class TicketService
     {
         return EventTicket::where('id', $id)->with('user.alumni')->where('tenant_id', getTenantId())->first();
     }
-
 }

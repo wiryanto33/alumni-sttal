@@ -22,7 +22,7 @@ class TransactionService
             ->where('tenant_id', getTenantId())
             ->where('type', '!=', TRANSACTION_DONATION)
             ->orderBy('id','DESC');
-        return datatables($transaction)
+    return datatables()->eloquent($transaction)
             ->addColumn('created_at', function ($data) {
                 return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('jS F, h:i:s A');
             })
@@ -40,7 +40,7 @@ class TransactionService
     {
         $userId = Auth::id();
         $transaction = Transaction::where('user_id', $userId)->with('user')->orderBy('id','DESC');
-        return datatables($transaction)
+    return datatables()->eloquent($transaction)
             ->addColumn('user',function ($data){
                 return $data->user->name;
             })
@@ -61,7 +61,7 @@ class TransactionService
     public function eventTransactionList()
     {
         $transaction = Transaction::where('type', TRANSACTION_EVENT)->where('tenant_id', getTenantId())->with('user')->orderBy('id','DESC');
-        return datatables($transaction)
+    return datatables()->eloquent($transaction)
             ->addColumn('amount', function ($data) {
                 return showPrice($data->amount);
             })
@@ -77,7 +77,7 @@ class TransactionService
     public function membershipTransactionList()
     {
         $transaction = Transaction::where('type', TRANSACTION_MEMBERSHIP)->where('tenant_id', getTenantId())->with('user')->orderBy('id','DESC');
-        return datatables($transaction)
+    return datatables()->eloquent($transaction)
             ->addColumn('amount', function ($data) {
                 return showPrice($data->amount);
             })
@@ -105,7 +105,7 @@ class TransactionService
             ->with('user')
             ->select('payments.*');
 
-        return datatables($data)
+    return datatables()->eloquent($data)
             ->addColumn('user', function ($data) {
                 return $data->user->name;
             })
