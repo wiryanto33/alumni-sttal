@@ -16,13 +16,18 @@ class LastUserActivity
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    
+
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->last_seen->lt(now())) {
-            /* last seen */
-            User::where('id', Auth::user()->id)->update(['last_seen' => now()->addMinutes(5)]);
+        if (Auth::check()) {
+            $user = Auth::user();
+            $cacheKey = 'user-last-seen-' . $user->id;
 
+            // Update last_seen only once every 5 minutes using cache
+            if (!Cache::has($cacheKey)) {
+                User::where('id', $user->id)->update(['last_seen' => now()]);
+                Cache::put($cacheKey, true, now()->addMinutes(5));
+            }
         }
         return $next($request);
     }

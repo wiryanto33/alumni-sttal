@@ -42,14 +42,14 @@ class SettingsTableSeeder extends Seeder
             [
                 'tenant_id' => 1,
                 'option_key' => 'app_name',
-                'option_value' => 'Zaialumni',
+                'option_value' => 'STTAL',
                 'created_at' => $pastDate,
                 'updated_at' => $updateDate,
             ],
             [
                 'tenant_id' => 1,
                 'option_key' => 'app_email',
-                'option_value' => 'zaialumni@example.com',
+                'option_value' => 'sttal@example.com',
                 'created_at' => $pastDate,
                 'updated_at' => $updateDate,
             ],
@@ -301,14 +301,14 @@ class SettingsTableSeeder extends Seeder
             [
                 'tenant_id' => 1,
                 'option_key' => 'banner_title',
-                'option_value' => 'We are the proud student of Zaialumni university forever',
+                'option_value' => 'We are the proud student of STTAL university forever',
                 'created_at' => '2023-10-22 13:22:43',
                 'updated_at' => $updateDate,
             ],
             [
                 'tenant_id' => 1,
                 'option_key' => 'banner_description',
-                'option_value' => 'Zaialumni is a user friendly that helps alumni easily connect and manage their activities. Alumni can sign up and get approved by submitting necessary documents, which allows them to join the alumni community',
+                'option_value' => 'STTAL is a user friendly that helps alumni easily connect and manage their activities. Alumni can sign up and get approved by submitting necessary documents, which allows them to join the alumni community',
                 'created_at' => '2023-10-22 13:22:43',
                 'updated_at' => $updateDate,
             ],
@@ -336,7 +336,7 @@ class SettingsTableSeeder extends Seeder
             [
                 'tenant_id' => 1,
                 'option_key' => 'about_us_title',
-                'option_value' => 'About Zaialumni',
+                'option_value' => 'About STTAL',
                 'created_at' => '2023-10-22 13:30:22',
                 'updated_at' => $updateDate,
             ],

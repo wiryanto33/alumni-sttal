@@ -22,8 +22,8 @@ class JobPostService
     }
 
     public function getMyJobPostList(){
-    $features = JobPost::where('tenant_id', getTenantId())->where('user_id', auth()->id())->orderBy('id','desc');
-    return datatables()->eloquent($features)
+        $features = JobPost::where('tenant_id', getTenantId())->where('user_id', auth()->id())->orderBy('id','desc')->get();
+        return datatables($features)
             ->addIndexColumn()
             ->addColumn('company_logo', function ($data) {
                 return '<img src="' . getFileUrl($data->company_logo) . '" alt="icon" class="rounded avatar-xs max-h-35">';
@@ -69,8 +69,8 @@ class JobPostService
 
 
     public function getAllJobPostList(){
-    $features = JobPost::where('tenant_id', getTenantId())->where('status',JOB_STATUS_APPROVED)->orderBy('id','desc');
-    return datatables()->eloquent($features)
+        $features = JobPost::where('tenant_id', getTenantId())->where('status',JOB_STATUS_APPROVED)->orderBy('id','desc')->get();
+        return datatables($features)
             ->addIndexColumn()
             ->addColumn('company_logo', function ($data) {
                 return '<img src="' . getFileUrl($data->company_logo) . '" alt="icon" class="rounded avatar-xs max-h-35">';
@@ -117,8 +117,8 @@ class JobPostService
 
 
     public function getPendingJobPostList(){
-    $features = JobPost::where('tenant_id', getTenantId())->where('status',JOB_STATUS_PENDING)->orderBy('id','desc');
-    return datatables()->eloquent($features)
+        $features = JobPost::where('tenant_id', getTenantId())->where('status',JOB_STATUS_PENDING)->orderBy('id','desc')->get();
+        return datatables($features)
             ->addIndexColumn()
             ->addColumn('company_logo', function ($data) {
                 return '<img src="' . getFileUrl($data->company_logo) . '" alt="icon" class="rounded avatar-xs max-h-35">';

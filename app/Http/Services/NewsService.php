@@ -14,8 +14,8 @@ class NewsService
 
     public function list()
     {
-    $features = News::where('tenant_id', getTenantId())->with(['category', 'author'])->orderBy('id','DESC');
-    return datatables()->eloquent($features)
+        $features = News::where('tenant_id', getTenantId())->with(['category', 'author'])->orderBy('id','DESC');
+        return datatables($features)
             ->addIndexColumn()
             ->addColumn('image', function ($data) {
                 return '<img src="' . getFileUrl($data->image) . '" alt="icon" class="max-h-35 rounded avatar-xs tbl-user-image">';

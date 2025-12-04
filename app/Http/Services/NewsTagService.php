@@ -13,8 +13,8 @@ class NewsTagService
 
     public function list()
     {
-    $newsTags = NewsTag::where('tenant_id', getTenantId())->orderBy('id','DESC');
-    return datatables()->eloquent($newsTags)
+        $newsTags = NewsTag::where('tenant_id', getTenantId())->orderBy('id','DESC');
+        return datatables($newsTags)
             ->addIndexColumn()
             ->addColumn('action', function ($data){
                 return '<ul class="d-flex align-items-center cg-5 justify-content-center">
