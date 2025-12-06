@@ -101,11 +101,21 @@ class AppServiceProvider extends ServiceProvider
                     config(['recaptchav3.secret' => getOption('google_recaptcha_secret_key')]);
                 }
 
+                // if (getOption('pusher_status', 0)) {
+                //     config(['broadcasting.connections.pusher.key' => getOption('pusher_app_key', 'null')]);
+                //     config(['broadcasting.connections.pusher.secret' => getOption('pusher_app_secret', 'null')]);
+                //     config(['broadcasting.connections.pusher.app_id' => getOption('pusher_app_id', 'null')]);
+                //     config(['broadcasting.connections.pusher.options.cluster' => getOption('pusher_cluster', 'null')]);
+                //     config(['broadcasting.default' => 'pusher']);
+                // } else {
+                //     config(['broadcasting.default' => 'null']);
+                // }
+
                 if (getOption('pusher_status', 0)) {
-                    config(['broadcasting.connections.pusher.key' => getOption('pusher_app_key', 'null')]);
-                    config(['broadcasting.connections.pusher.secret' => getOption('pusher_app_secret', 'null')]);
-                    config(['broadcasting.connections.pusher.app_id' => getOption('pusher_app_id', 'null')]);
-                    config(['broadcasting.connections.pusher.options.cluster' => getOption('pusher_cluster', 'null')]);
+                    config(['broadcasting.connections.pusher.key' => getOption('pusher_app_key')]);
+                    config(['broadcasting.connections.pusher.secret' => getOption('pusher_app_secret')]);
+                    config(['broadcasting.connections.pusher.app_id' => getOption('pusher_app_id')]);
+                    config(['broadcasting.connections.pusher.options.cluster' => getOption('pusher_cluster', 'mt1')]);
                     config(['broadcasting.default' => 'pusher']);
                 } else {
                     config(['broadcasting.default' => 'null']);
